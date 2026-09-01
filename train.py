@@ -8,3 +8,17 @@ embeddings = torch.tensor([
 
 print(embeddings)
 print("Shape:", embeddings.shape)
+
+cat = embeddings[0]
+dog = embeddings[1]
+car = embeddings[2]
+
+score = torch.dot(cat,dog)
+
+print("cat", cat)
+print("dog", dog)
+print("car", car)
+
+print("cat · dog:", torch.dot(cat, dog))
+print("cat · car:", torch.dot(cat, car))
+print("dog · car:", torch.dot(dog, car))
