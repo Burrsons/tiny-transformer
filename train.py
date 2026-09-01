@@ -31,3 +31,10 @@ scores = embeddings @ embeddings.T
 
 print("Scores:")
 print(scores)
+
+attention_weights = torch.softmax(scores, dim=1)
+print(attention_weights)
+
+context = attention_weights @ embeddings
+print("Context:")
+print(context) 
