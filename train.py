@@ -22,3 +22,12 @@ print("car", car)
 print("cat · dog:", torch.dot(cat, dog))
 print("cat · car:", torch.dot(cat, car))
 print("dog · car:", torch.dot(dog, car))
+
+print("cat · dog:", torch.dot(cat, dog))
+print("cat · car:", torch.dot(cat, car))
+print("dog · car:", torch.dot(dog, car))
+
+scores = embeddings @ embeddings.T
+
+print("Scores:")
+print(scores)
