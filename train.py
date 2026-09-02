@@ -68,6 +68,17 @@ scores = (queries @ keys.t()) / torch.sqrt(
     torch.tensor(d_keys, dtype=torch.float32)
 )
 
+# Masking
+mask = torch.tril(torch.ones(scores.shape))
+
+print("\nCausal mask:")
+print(mask)
+
+# Mask future tokens 
+scores = scores.masked_fill(mask == 0, float("-inf"))
+print("\nMasked attention scores:")
+print(scores)
+
 print("\n Scaled attention scores:")
 print(scores)
 
