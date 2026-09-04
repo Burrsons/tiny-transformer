@@ -74,24 +74,3 @@ class BasicTokenizer:
             ids = merge(ids, pair, new_id)
 
         return ids
-
-# Test code
-with open("white_nights.txt", "r", encoding="utf-8") as f:
-     text = f.read()
-
-tokenizer = BasicTokenizer()
-
-tokenizer.train(
-    text,
-    vocab_size=512,
-    verbose=True
-)
-sample = "Nastenka"
-
-encoded = tokenizer.encode(sample)
-decoded = tokenizer.decode(encoded)
-
-print("Enocded:", encoded) 
-print("Number of tokens:", len(encoded))
-print("Decoded:", decoded)
-print("Matches original:", decoded == sample)
