@@ -25,7 +25,7 @@ def merge(ids, pair, new_id):
     return new_ids
 class BasicTokenizer:
     
-    def train(self, text, vocab_size, verbose=False):
+    def train(self, text, vocab_size, verbose=True):
         assert vocab_size >= 256
 
         num_merges = vocab_size - 256
@@ -51,8 +51,8 @@ class BasicTokenizer:
 
             self.merges[pair] = new_id
             self.vocab[new_id] = self.vocab[pair[0]] + self.vocab[pair[1]]
-
-            print(f"merge {i + 1}: {pair} -> {new_id}")
+            if verbose:
+                print(f"merge {i + 1}: {pair} -> {new_id}")
        
     def decode(self, ids):
         text_bytes = b"".join(self.vocab[idx] for idx in ids)
@@ -76,12 +76,22 @@ class BasicTokenizer:
         return ids
 
 # Test code
+with open("white_nights.txt", "r", encoding="utf-8") as f:
+     text = f.read()
+
 tokenizer = BasicTokenizer()
 
-tokenizer.train("hello hello hello world world", 260)
+tokenizer.train(
+    text,
+    vocab_size=512,
+    verbose=True
+)
+sample = "Nastenka"
 
-encoded = tokenizer.encode("hello")
-print(encoded)
-
+encoded = tokenizer.encode(sample)
 decoded = tokenizer.decode(encoded)
-print(decoded)
+
+print("Enocded:", encoded) 
+print("Number of tokens:", len(encoded))
+print("Decoded:", decoded)
+print("Matches original:", decoded == sample)
